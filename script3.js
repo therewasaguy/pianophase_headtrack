@@ -9,6 +9,9 @@
   var container, stats;
   var camera, scene, renderer;
   var plane;
+  var leftNotes, rightNotes;
+  var clock;
+  var frameCount = 0;
 
   function init() {
 
@@ -64,40 +67,9 @@
     plane4.position.z = 50 - 1500;
     scene.add(plane4);
 
-    // Create sprites with lines
-
-    var placeTarget = function (x, y, z) {
-
-      // Cylinder
-      var cylinder = new THREE.Mesh(new THREE.CylinderGeometry(30, 30, 1, 20, 1, false), new THREE.MeshBasicMaterial({
-        color: 0xeeeeee
-      }));
-      cylinder.position.x = x;
-      cylinder.rotation.x = Math.PI / 2;
-      cylinder.position.y = y;
-      cylinder.position.z = z;
-      scene.add(cylinder);
-
-      var geometry = new THREE.Geometry();
-      geometry.vertices.push(new THREE.Vertex(new THREE.Vector3(0, 0, -80000)));
-      geometry.vertices.push(new THREE.Vertex(new THREE.Vector3(0, 0, z)));
-      var line = new THREE.Line(geometry, new THREE.LineBasicMaterial({
-        color: 0xeeeeee
-      }));
-      line.position.x = x;
-      line.position.y = y;
-      scene.add(line);
-    };
-
-    placeTarget(-150, -150, -550);
-    placeTarget(0, -150, -200);
-    placeTarget(100, 0, 500);
-    placeTarget(-150, 100, 0);
-    placeTarget(150, -100, -1050);
-    placeTarget(50, 0, 1100);
-    placeTarget(-50, -50, 600);
-    placeTarget(0, 150, -2100);
-    placeTarget(-130, 0, -700);
+    //notes
+    leftNotes = new Notes(-500, 1);
+    rightNotes = new Notes(500, 0);
 
     renderer = new THREE.WebGLRenderer({
       clearAlpha: 1
@@ -111,6 +83,9 @@
     stats.domElement.style.top = '0px';
     document.body.appendChild(stats.domElement);
 
+    clock = new THREE.Clock();
+    clock.start();
+
     window.addEventListener('resize', onWindowResize, false);
 
   }
@@ -123,12 +98,22 @@
   }
 
   function animate() {
-
-    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+    frameCount++;
     stats.update();
 
-    requestAnimationFrame(animate);
+    //console.log(clock.getElapsedTime());
 
+    if (frameCount % 60 === 0) {
+      leftNotes.produce();
+      scene.add(leftNotes.notes[leftNotes.notes.length - 1].mesh);
+      //rightNotes.produce();
+      //scene.add(rightNotes.notes[rightNotes.notes.length - 1].mesh);
+    }
+    leftNotes.update();
+    //rightNotes.update();
+
+    renderer.render(scene, camera);
   }
 
   init();

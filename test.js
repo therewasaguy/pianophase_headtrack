@@ -37,8 +37,8 @@ function animate() {
   requestAnimationFrame(animate);
 
   //console.log(mesh.position instanceof THREE.Vector3);
-  console.log(mesh.position, unit);
-  mesh.position = mesh.position.add(unit);
+  //console.log(mesh.position, unit);
+  mesh.position.add(unit);
   //mesh.position = mesh.position.add(mesh.position, unit);
   // mesh.rotation.x += 0.01;
   // mesh.rotation.y += 0.02;
