@@ -1,0 +1,31 @@
+<style type="text/css">
+  body, html{
+    top: 0;
+    left: 0;
+    padding: 0;
+    margin: 0;
+  }
+  video{
+    position: absolute;
+    z-index: 1;
+    /*display:none;*/
+  }
+</style>
+<div id="container"></div>
+<canvas id="inputCanvas" width="160" height="120" style="display:none"></canvas>
+<video id="inputVideo" width="160" height="120" autoplay loop></video>
+<script src="http://ajax.googleapis.com/ajax/libs/threejs/r67/three.min.js"></script>
+<script type="text/javascript" src="lib/Detector.js"></script>
+<script type="text/javascript" src="lib/stats.min.js"></script>
+<script type="text/javascript" src="lib/headtrackr.min.js"></script>
+<script type="text/javascript" src="lib/controllers.js"></script>
+<script type="text/javascript" src="lib/TrackballControls.js"></script>
+<!-- <script type="text/javascript" src="script.js"></script> -->
+<!--<script type="text/javascript">
+  var videoInput = document.getElementById('inputVideo');
+  var canvasInput = document.getElementById('inputCanvas');
+  var htracker = new headtrackr.Tracker();
+  htracker.init(videoInput, canvasInput);
+  htracker.start();
+</script>-->
+<script type="text/javascript" src="script3.js"></script>
