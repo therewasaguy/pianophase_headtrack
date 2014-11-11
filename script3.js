@@ -110,7 +110,8 @@
 
     //left wall
     plane2 = new THREE.Mesh(new THREE.PlaneGeometry(3000, 1000, 15, 5), new THREE.MeshPhongMaterial({
-      color: 0xcccccc
+      color: 0xcccccc,
+      wireframe: true
     }));
     plane2.rotation.y = Math.PI / 2;
     plane2.position.x = -500;
@@ -119,7 +120,8 @@
 
     //right wall
     plane3 = new THREE.Mesh(new THREE.PlaneGeometry(3000, 1000, 15, 5), new THREE.MeshPhongMaterial({
-      color: 0xcccccc
+      color: 0xcccccc,
+      wireframe: true
     }));
     plane3.rotation.y = -Math.PI / 2;
     plane3.position.x = 500;
@@ -194,7 +196,7 @@
     // light6.position.x = Math.cos(time * 0.7) * d;
     // light6.position.z = Math.cos(time * 0.5) * d;
 
-    if (frameCount % 30 === 0) {
+    if (frameCount % 20 === 0) {
       leftNotes.produce();
       rightNotes.produce();
     }

@@ -29,8 +29,8 @@
     this.direction = _direction;
     this.change = false;
     this.hit = false;
-    this.left = new THREE.Vector3(1, 0, 6);
-    this.right = new THREE.Vector3(-1, 0, 6);
+    this.left = new THREE.Vector3(2, 0, 12);
+    this.right = new THREE.Vector3(-2, 0, 12);
 
   }
 
@@ -46,7 +46,7 @@
         this.mesh.position.add(this.right);
       }
     } else {
-      this.mesh.position.add(new THREE.Vector3(0, 0, 6));
+      this.mesh.position.add(new THREE.Vector3(0, 0, 12));
     }
   };
 
