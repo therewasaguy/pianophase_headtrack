@@ -12,6 +12,8 @@
   var frameCount = 0;
   var light1, light2, light3, light4, light5, light6;
 
+  var melody = ["E4", "F♯4", "B4", "C♯5", "D5", "F♯4", "E4", "C♯5", "B4", "F♯4", "D5", "C♯5"];
+
   function init() {
 
     container = document.createElement('div');
@@ -169,6 +171,12 @@
 
   }
 
+  function map(para, orMin, orMax, tarMin, tarMax) {
+    var ratio = (para - orMin) / (orMax - orMin);
+    var tarValue = ratio * (tarMax - tarMin) + tarMin;
+    return tarValue;
+  }
+
   function animate() {
     requestAnimationFrame(animate);
     frameCount++;
@@ -196,8 +204,10 @@
     // light6.position.x = Math.cos(time * 0.7) * d;
     // light6.position.z = Math.cos(time * 0.5) * d;
 
-    if (frameCount % 20 === 0) {
+    if (frameCount % 10 === 0) {
       leftNotes.produce();
+    }
+    if (frameCount % 30 === 0) {
       rightNotes.produce();
     }
     leftNotes.update();
@@ -208,6 +218,9 @@
     rightNotes.destroy();
 
     renderer.render(scene, camera);
+    //console.log(camera.position.x, camera.position.y, camera.position.z);
+    var value = Math.min(Math.max(map(camera.position.x, -600, 300, 0, 1), 0), 1);
+    //panner.setPan(value);
   }
 
   init();
@@ -217,6 +230,7 @@
   videoInput.style.position = 'absolute';
   videoInput.style.right = '0';
   videoInput.style.zIndex = '100001';
+  videoInput.setAttribute('width', '160');
   videoInput.style.display = 'block';
 
   // set up camera controller

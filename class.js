@@ -28,15 +28,40 @@
 
     this.direction = _direction;
     this.change = false;
+    this.last = 0;
     this.hit = false;
     this.left = new THREE.Vector3(2, 0, 12);
     this.right = new THREE.Vector3(-2, 0, 12);
 
   }
 
-  // Note.prototype.play = function(){
-
-  // }
+  Note.prototype.play = function () {
+    if (this.change && this.last === 0) {
+      switch (this.mesh.position.y) {
+      case -100:
+        playerPan(E4, this.direction);
+        E4.start();
+        break;
+      case -60:
+        playerPan(F4, this.direction);
+        F4.start();
+        break;
+      case 40:
+        playerPan(B4, this.direction);
+        B4.start();
+        break;
+      case 80:
+        playerPan(C5, this.direction);
+        C5.start();
+        break;
+      case 100:
+        playerPan(D5, this.direction);
+        D5.start();
+        break;
+      }
+      this.last++;
+    }
+  };
 
   Note.prototype.update = function () {
     if (!this.change) {
@@ -106,6 +131,7 @@
   Notes.prototype.update = function () {
     for (var i = 0; i < this.notes.length; i++) {
       this.notes[i].update();
+      this.notes[i].play();
       if (i === this.notes.length - 1) {
         break;
       }
